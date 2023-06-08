@@ -32,7 +32,7 @@ public class Deserializer
         while(true)
         {
             try {
-                if (!((line = connector.readLine()) != null)) break;
+                if ((line = connector.readLine()) == null) break;
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

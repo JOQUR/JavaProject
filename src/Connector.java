@@ -10,7 +10,7 @@ public class Connector
 
     private String location;
 
-    private final String API_KEY = "8e543484d0eacb36acd5b111290b809f";
+    private final String API_KEY = "";
     private Units unit = Units.standard;
 
     public Connector(String location, Units unit)
