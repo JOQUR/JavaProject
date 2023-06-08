@@ -12,23 +12,7 @@ public class Main {
 
 
     public static void main(String[] args) {
-
-        try
-        {
-            StringBuilder result = new StringBuilder();
-            String line;
-            BufferedReader connector = new Connector("Zalas", Units.metric).getData();
-            while((line = connector.readLine()) != null)
-            {
-                result.append(line);
-            }
-            connector.close();
-            System.out.println(result);
-
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        System.out.println(new Deserializer().json2string(new Connector().getData("Zalas", Units.metric)));
+        Deserializer des = new Deserializer();
     }
 }

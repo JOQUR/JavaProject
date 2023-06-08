@@ -18,6 +18,10 @@ public class Connector
         this.location = location;
         this.unit = unit;
     }
+    public Connector()
+    {
+
+    }
 
 
     public BufferedReader getData()
