@@ -6,14 +6,32 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class Main {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 //        System.out.println(new Deserializer().json2string(new Connector().getData("Zalas", Units.metric)));
         Deserializer des = new Deserializer();
-        System.out.println(des.getTemp());
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                des.updateFields();
+            }
+        };
+        Timer timer = new Timer("Timer");
+        long delay = 1000;
+        timer.scheduleAtFixedRate(task, delay, delay);
+
+        while (true)
+        {
+            System.out.println("Temperature: " + des.getTemp());
+            System.out.println("Real Feel: " + des.getFeelsLike());
+            System.out.println("Humidity: " + des.getHumidity() + "%");
+            Thread.sleep(10000);
+        }
     }
 }

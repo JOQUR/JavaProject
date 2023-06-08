@@ -16,6 +16,14 @@ public class Deserializer
     {
         return this.temp;
     }
+    public float getHumidity()
+    {
+        return this.humidity;
+    }
+    public float getFeelsLike()
+    {
+        return this.feelsLike;
+    }
     private String json2string()
     {
         StringBuilder result = new StringBuilder();
@@ -38,13 +46,15 @@ public class Deserializer
         return result.toString();
     }
 
-    private void updateFields()
+    public void updateFields()
     {
         String jsonStr = json2string();
         JSONObject jsonObject = new JSONObject(jsonStr);
         JSONObject o = (JSONObject) jsonObject.get("main");
 
         this.temp = o.getFloat("temp");
+        this.feelsLike = o.getFloat("feels_like");
+        this.humidity = o.getInt("humidity");
     }
 
     public Deserializer()
