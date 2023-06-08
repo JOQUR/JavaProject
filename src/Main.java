@@ -14,5 +14,6 @@ public class Main {
     public static void main(String[] args) {
 //        System.out.println(new Deserializer().json2string(new Connector().getData("Zalas", Units.metric)));
         Deserializer des = new Deserializer();
+        System.out.println(des.getTemp());
     }
 }

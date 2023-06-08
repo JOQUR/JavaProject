@@ -5,13 +5,14 @@ import java.io.IOException;
 
 public class Deserializer
 {
-    private int temp;
-    private int feelsLike;
+    private float temp;
+    private float feelsLike;
     private int windSpeed;
     private String desc;
     private int pressure;
+    private int humidity;
 
-    public int getTemp()
+    public float getTemp()
     {
         return this.temp;
     }
@@ -43,8 +44,7 @@ public class Deserializer
         JSONObject jsonObject = new JSONObject(jsonStr);
         JSONObject o = (JSONObject) jsonObject.get("main");
 
-        System.out.println(o.getFloat("temp"));
-        System.out.println(o.getFloat("feels_like"));
+        this.temp = o.getFloat("temp");
     }
 
     public Deserializer()
