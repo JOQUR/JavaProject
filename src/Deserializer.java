@@ -11,6 +11,18 @@ public class Deserializer
     private String desc;
     private int pressure;
     private int humidity;
+    private static String location = "Kraków";
+
+
+    public void setLocation(String val)
+    {
+        this.location = val;
+    }
+
+    public String getLocation()
+    {
+        return location;
+    }
 
     public float getTemp()
     {
@@ -24,11 +36,11 @@ public class Deserializer
     {
         return this.feelsLike;
     }
-    private String json2string()
+    public String json2string()
     {
         StringBuilder result = new StringBuilder();
         String line;
-        BufferedReader connector = new Connector("Zalas", Units.metric).getData();
+        BufferedReader connector = new Connector(this.location, Units.metric).getData();
         while(true)
         {
             try {
@@ -49,12 +61,20 @@ public class Deserializer
     public void updateFields()
     {
         String jsonStr = json2string();
-        JSONObject jsonObject = new JSONObject(jsonStr);
-        JSONObject o = (JSONObject) jsonObject.get("main");
+        try {
+            JSONObject jsonObject = new JSONObject(jsonStr);
 
-        this.temp = o.getFloat("temp");
-        this.feelsLike = o.getFloat("feels_like");
-        this.humidity = o.getInt("humidity");
+            JSONObject o = (JSONObject) jsonObject.get("main");
+
+            this.temp = o.getFloat("temp");
+            this.feelsLike = o.getFloat("feels_like");
+            this.humidity = o.getInt("humidity");
+            this.desc = jsonObject.getString("name");
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
 
     public Deserializer()
